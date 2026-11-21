@@ -5,6 +5,8 @@ import { toNodeHandler } from "better-auth/node";
 import { connectDB } from "./src/config/db.js";
 import { auth } from "./src/config/auth.js";
 import healthRoutes from "./src/routes/health.routes.js";
+import jwtRoutes from "./src/routes/jwt.routes.js";
+import userRoutes from "./src/routes/user.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,7 +29,6 @@ app.use(async (req, res, next) => {
 });
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -35,6 +36,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/health", healthRoutes);
+app.use("/api/jwt", jwtRoutes);
+app.use("/api/users", userRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
