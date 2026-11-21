@@ -1,7 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import { toNodeHandler } from "better-auth/node";
 import { connectDB } from "./src/config/db.js";
+import { auth } from "./src/config/auth.js";
 import healthRoutes from "./src/routes/health.routes.js";
 
 const app = express();
@@ -11,9 +13,9 @@ app.use(
   cors({
     origin: (process.env.CLIENT_URL || "").split(",").map((u) => u.trim()),
     credentials: true,
+    exposedHeaders: ["set-auth-token"],
   })
 );
-app.use(express.json());
 
 app.use(async (req, res, next) => {
   try {
@@ -24,8 +26,12 @@ app.use(async (req, res, next) => {
   }
 });
 
+app.all("/api/auth/*splat", toNodeHandler(auth));
+
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.json({ message: "MentorLagbe API is running " });
+  res.json({ message: "MentorLagbe API is running 🚀" });
 });
 
 app.use("/api/health", healthRoutes);
@@ -38,7 +44,7 @@ app.use((err, req, res, next) => {
 });
 
 if (!process.env.VERCEL) {
-  app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`🚀 Server on http://localhost:${PORT}`));
 }
 
 export default app;
