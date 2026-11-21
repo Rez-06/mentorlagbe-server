@@ -7,6 +7,7 @@ import { auth } from "./src/config/auth.js";
 import healthRoutes from "./src/routes/health.routes.js";
 import jwtRoutes from "./src/routes/jwt.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
+import tuitionRoutes from "./src/routes/tuition.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/api/health", healthRoutes);
 app.use("/api/jwt", jwtRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/tuitions", tuitionRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
