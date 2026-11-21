@@ -8,6 +8,7 @@ import healthRoutes from "./src/routes/health.routes.js";
 import jwtRoutes from "./src/routes/jwt.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import tuitionRoutes from "./src/routes/tuition.routes.js";
+import uploadRoutes from "./src/routes/upload.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,10 +41,12 @@ app.use("/api/health", healthRoutes);
 app.use("/api/jwt", jwtRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/tuitions", tuitionRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
 app.use((err, req, res, next) => {
+  if (err.code === "LIMIT_FILE_SIZE") return res.status(413).json({ message: "Image must be 4MB or smaller" });
   console.error(err);
   res.status(err.status || 500).json({ message: err.message || "Server error" });
 });
