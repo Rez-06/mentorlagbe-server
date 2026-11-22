@@ -10,6 +10,7 @@ import userRoutes from "./src/routes/user.routes.js";
 import tuitionRoutes from "./src/routes/tuition.routes.js";
 import uploadRoutes from "./src/routes/upload.routes.js";
 import tutorRoutes from "./src/routes/tutor.routes.js";
+import applicationRoutes from "./src/routes/application.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -44,6 +45,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/tuitions", tuitionRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/tutor", tutorRoutes);
+app.use("/api/applications", applicationRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
