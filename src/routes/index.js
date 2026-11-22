@@ -7,6 +7,7 @@ import uploadRoutes from "./upload.routes.js";
 import tutorRoutes from "./tutor.routes.js";
 import applicationRoutes from "./application.routes.js";
 import paymentRoutes from "./payment.routes.js";
+import adminPaymentRoutes from "./adminPayments.routes.js";
 import adminRoutes from "./admin.routes.js";
 
 const router = Router();
@@ -19,6 +20,7 @@ router.use("/upload", uploadRoutes);
 router.use("/tutor", tutorRoutes);
 router.use("/applications", applicationRoutes);
 router.use("/payments", paymentRoutes);
+router.use("/admin/payments", adminPaymentRoutes);
 router.use("/admin", adminRoutes);
 
 export default router;
