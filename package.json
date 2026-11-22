@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "seed:reviews": "node scripts/seedReviews.js",
+    "seed:all": "node scripts/seed.js && node scripts/seedReviews.js"
   },
   "dependencies": {
     "better-auth": "^1.7.27",
