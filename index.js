@@ -4,14 +4,8 @@ import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
 import { connectDB } from "./src/config/db.js";
 import { auth } from "./src/config/auth.js";
-import healthRoutes from "./src/routes/health.routes.js";
-import jwtRoutes from "./src/routes/jwt.routes.js";
-import userRoutes from "./src/routes/user.routes.js";
-import tuitionRoutes from "./src/routes/tuition.routes.js";
-import uploadRoutes from "./src/routes/upload.routes.js";
-import tutorRoutes from "./src/routes/tutor.routes.js";
-import applicationRoutes from "./src/routes/application.routes.js";
-import adminRoutes from "./src/routes/admin.routes.js";
+import apiRoutes from "./src/routes/index.js";
+import { stripeWebhook } from "./src/routes/payment.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,6 +18,7 @@ app.use(
   })
 );
 
+// Make sure the DB is connected before every request (works locally and on Vercel)
 app.use(async (req, res, next) => {
   try {
     await connectDB();
@@ -33,21 +28,17 @@ app.use(async (req, res, next) => {
   }
 });
 
+// These two MUST come before express.json()
+app.post("/api/payments/webhook", express.raw({ type: "application/json" }), stripeWebhook);
 app.all("/api/auth/*splat", toNodeHandler(auth));
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({ message: "MentorLagbe API is running 🚀" });
 });
 
-app.use("/api/health", healthRoutes);
-app.use("/api/jwt", jwtRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/tuitions", tuitionRoutes);
-app.use("/api/upload", uploadRoutes);
-app.use("/api/tutor", tutorRoutes);
-app.use("/api/applications", applicationRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api", apiRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
