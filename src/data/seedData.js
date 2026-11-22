@@ -1,7 +1,7 @@
 // AI-generated realistic demo data. Passwords are for demo accounts only.
 export const users = [
   { name: "MentorLagbe Admin", email: "admin@mentorlagbe.com", password: "Admin@123", role: "admin", phone: "01700000001", bio: "Platform administrator." },
-  { name: "Nusrat Jahan", email: "tutor@mentorlagbe.com", password: "Tutor@123", role: "tutor", phone: "01711111101", bio: "BUET graduate with 6 years of experience teaching SSC and A Level Mathematics." },
+  { name: "Nusrat Jahan", email: "tutor@mentorlagbe.com", password: "Tutor@123", role: "tutor", plan: "pro", phone: "01711111101", bio: "BUET graduate with 6 years of experience teaching SSC and A Level Mathematics." },
   { name: "Imran Hossain", email: "imran@mentorlagbe.com", password: "Tutor@123", role: "tutor", plan: "pro", phone: "01711111102", bio: "Physics and Chemistry mentor. I turn confusing concepts into simple pictures." },
   { name: "Farhana Rahman", email: "farhana@mentorlagbe.com", password: "Tutor@123", role: "tutor", phone: "01711111103", bio: "IELTS trainer (Band 8.5) and English language coach." },
   { name: "Tanvir Alam", email: "tanvir@mentorlagbe.com", password: "Tutor@123", role: "tutor", phone: "01711111104", bio: "Software engineer who teaches Python, JavaScript and ICT." },
@@ -46,4 +46,5 @@ export const applications = [
 export const payments = [
   { email: "imran@mentorlagbe.com", planName: "Pro Tutor Plan", amount: 15, transactionId: "pi_seed_001", stripeSessionId: "cs_seed_001" },
   { email: "mim@mentorlagbe.com", planName: "Pro Student Plan", amount: 10, transactionId: "pi_seed_002", stripeSessionId: "cs_seed_002" },
+  { email: "tutor@mentorlagbe.com", planName: "Pro Tutor Plan", amount: 15, transactionId: "pi_seed_003", stripeSessionId: "cs_seed_003" },
 ];
