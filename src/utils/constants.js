@@ -2,3 +2,4 @@ export const SUBJECTS = ["Mathematics", "Physics", "Chemistry", "Biology", "Engl
 export const CLASS_LEVELS = ["Class 6-8", "SSC", "HSC", "O Level", "A Level", "University", "Professional"];
 export const MODES = ["Online", "Offline"];
 export const FREE_TUITION_LIMIT = 2;
+export const FREE_BOOKMARK_LIMIT = 5;
